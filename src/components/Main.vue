@@ -2,16 +2,16 @@
     <v-container fluid>
       <v-row dense>
         <v-col
-          v-for="card in cards"
-          :key="card.title"
+          v-for="movie in myJson"
+          :key="movie.title"
           cols="12"
           xs="12" sm="6" md="3" lg="3" xl="3"
         >
         <v-card class="mx-auto" max-width="344">
           
-          <v-img :src="card.src" height="200px"></v-img>
+          <v-img :src="movie.src" height="200px"></v-img>
           <v-card-title>
-            {{card.title}}
+            {{movie.title}}
           </v-card-title>
           <v-card-subtitle>
             1,000 miles of wonder
@@ -21,13 +21,13 @@
             <v-btn text>Share</v-btn>
             <v-btn color="purple" text> Explore </v-btn>
             <v-spacer></v-spacer>
-            <v-btn icon @click="card.show = !card.show">
-              <v-icon>{{ card.show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+            <v-btn icon @click="movie.show = !movie.show">
+              <v-icon>{{ movie.show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
             </v-btn>
           </v-card-actions>
           
           <v-expand-transition >
-            <div v-show="card.show" r>
+            <div v-show="movie.show" >
               <v-divider></v-divider>
               <v-card-text>
                 I'm a thing. But, like most politicians, he promised more than he could deliver. 
@@ -46,17 +46,16 @@
 <script>
 
 // import corePlayer from './components/corePlayer';
-
+  import movieJson from '../assets/moviesData.json';
+  var path = require('E:/Movies/Maayavan(2017)/Maayavan_poster.jpg');
     export default {
       components:{
         // corePlayer,
       },
       data: () => ({
-          cards : [
-              { title: 'Pre-fab homes', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', flex: 3, show: false },
-              { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg', flex: 3, show:false },
-              { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg', flex: 3, show:false},
-          ],
+          myJson : movieJson,
+          path : path,
+          
       }),
     }
 </script>

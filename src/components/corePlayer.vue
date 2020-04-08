@@ -4,7 +4,7 @@
         crossorigin
         playsinline
         poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg"
-        v-bind:src= "src"
+        :src= "path"
       >
         <!-- <source
           size="576"
@@ -52,7 +52,7 @@
     name: 'App',
     data (){
       return{
-        src: path,
+        path: path,
       }
     }
   }

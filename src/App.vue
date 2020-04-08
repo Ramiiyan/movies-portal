@@ -6,6 +6,7 @@
 
     <v-content>
       <Main/>
+      <!-- <player/> -->
     </v-content>
 
   </v-app>
@@ -13,12 +14,14 @@
 
 <script>
 import Main from './components/Main';
+// import Player from './components/corePlayer';
 
 export default {
   name: 'App',
 
   components: {
     Main,
+    // Player,
   },
 
   data: () => ({

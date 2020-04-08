@@ -1,10 +1,13 @@
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
+import Vue from 'vue';
+import App from './App.vue';
+import router from './router';
 import vuetify from './plugins/vuetify';
-import '@babel/polyfill'
+import '@babel/polyfill';
+import vuePlayer from 'vue-plyr';
 
 Vue.config.productionTip = false
+
+Vue.use(vuePlayer)
 
 new Vue({
   router,
