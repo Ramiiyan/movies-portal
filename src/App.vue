@@ -6,6 +6,7 @@
 
     <v-content>
       <Main/>
+      <v-spacer></v-spacer>
       <!-- <player/> -->
     </v-content>
 
