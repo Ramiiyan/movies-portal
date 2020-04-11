@@ -18,10 +18,11 @@
           </v-card-subtitle>
           
           <v-card-actions>
-            <v-btn text>Share</v-btn>
-            <v-btn color="purple" text> Explore </v-btn>
+            <v-btn color="purple" text @click="selectedMSrc = movie.src"> 
+              Play 
+            </v-btn>
             <v-spacer></v-spacer>
-            <v-btn icon @click="movie.show = !movie.show">
+            <v-btn icon @click="movie.show = !movie.show" >
               <v-icon>{{ movie.show ? 'mdi-chevron-down' : 'mdi-chevron-up' }}</v-icon>
             </v-btn>
           </v-card-actions>
@@ -30,7 +31,7 @@
             <div v-show="!movie.show" >
               <v-divider></v-divider>
               <v-responsive>
-                <player/>
+                <vuePlayer :path=movie.src></vuePlayer>
               </v-responsive>
             </div>
           </v-expand-transition>
@@ -42,24 +43,32 @@
 
 <script>
 
-  import player from './VuePlayer';
+  import vuePlayer from './VuePlayer';
   import movieJson from '../assets/moviesData.json';
-  // import movies from 'E:/Movies';
   // var path = require("../assets/posters/Maayavan_2017.jpg");
-  
+
     export default {
       components:{
-        player,
+        vuePlayer,
       },
       data: () => ({
           myJson : movieJson,
+          selectedMSrc : undefined,
           // path : path,
           
       }),
       methods: {
         getPoster(path){
           return require('../assets/posters/'+ path);
+        },
+      },
+      computed:{
+        renderText(){
+          return this.selectedMSrc;
         }
-      }
+
+      },
     }
+    
+    
 </script>
