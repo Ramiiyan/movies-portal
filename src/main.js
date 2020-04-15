@@ -5,9 +5,11 @@ import vuetify from './plugins/vuetify';
 import '@babel/polyfill';
 import vuePlayer from 'vue-plyr';
 
+
 Vue.config.productionTip = false
 
 Vue.use(vuePlayer)
+// Vue.use(VueAxios,axios)
 
 new Vue({
   router,

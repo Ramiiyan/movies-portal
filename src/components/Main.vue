@@ -18,7 +18,7 @@
           </v-card-subtitle>
           
           <v-card-actions>
-            <v-btn color="purple" text @click="selectedMSrc = movie.src"> 
+            <v-btn color="purple" text :href= getURL(movie.src)> 
               Play 
             </v-btn>
             <v-spacer></v-spacer>
@@ -31,7 +31,7 @@
             <div v-show="!movie.show" >
               <v-divider></v-divider>
               <v-responsive>
-                <vuePlayer :path=movie.src></vuePlayer>
+                <vuePlayer :path= getURL(movie.src)></vuePlayer>
               </v-responsive>
             </div>
           </v-expand-transition>
@@ -45,22 +45,27 @@
 
   import vuePlayer from './VuePlayer';
   import movieJson from '../assets/moviesData.json';
+  
   // var path = require("../assets/posters/Maayavan_2017.jpg");
-
+  const URLHEAD = "http://192.168.10.1:1337/";
     export default {
       components:{
         vuePlayer,
       },
       data: () => ({
-          myJson : movieJson,
-          selectedMSrc : undefined,
-          // path : path,
+        UrlHead : URLHEAD,
+        myJson : movieJson,
+        selectedMSrc : undefined,
+        // path : path,
           
       }),
       methods: {
         getPoster(path){
           return require('../assets/posters/'+ path);
         },
+        getURL(path){
+          return URLHEAD + path; 
+        }
       },
       computed:{
         renderText(){

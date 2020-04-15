@@ -1,5 +1,12 @@
 <template>
-  <div v-html="vlcPlayer">    
+  <div>
+    <video width="320" height="240" autoplay controls data-setup='{ "techOrder": ["vlc"] }'>
+      <!-- <source :src="require('E:/Movies/Yaman.mp4')" > -->
+      <!-- <source src="movie.ogg" type="video/ogg"> -->
+      Your browser does not support the video tag.
+    </video>
+    <v-spacer></v-spacer> 
+    <embed  autostart="false" height="240" width="320" />   
   </div>
 </template>
 <script>
@@ -9,8 +16,8 @@
 export default {
     data(){
       return{
-        vlcPlayer: 
-        ' <video id="video" class="video-js vjs-default-skin" height="640" width="1080" controls data-setup='+'{ "techOrder": ["vlc"] }'+'> <source src="E:/Movies/Sahoo_2019.mkv" /> </video>'
+        // path2:require('E:/Movies/Mom.mkv'),
+        // path2:require('E:/Movies/Yaman.mp4'),
       }
     }
 }
