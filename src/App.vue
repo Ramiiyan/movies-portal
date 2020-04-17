@@ -8,9 +8,20 @@
     </v-app-bar>
 
     <v-content>
-      <Main/>
+      <Main :rawData="rawData"/>
       <v-spacer></v-spacer>
-      <p>{{ipData}}</p>
+      <!-- <div v-for="(titles,url,index) in rawData" :key="index">
+        <v-col>
+          <v-row v-for="(title,index) in titles" :key=index>
+            {{title}}
+          </v-row>
+        </v-col>
+        <v-col>  
+          <v-row v-for="(url,index) in urls" :key="index">
+            {{url}}
+          </v-row>
+        </v-col>
+      </div> -->
       <!-- <player/> -->
     </v-content>
 
@@ -31,20 +42,26 @@ export default {
   },
 
   data:() => ({
-    ipData:null,
-    results:[],
+    rawData:{
+      titles:[],
+      urls:[],
+    }
+
     
 
     //
   }),
   mounted() {
-    axios.get('http://192.168.10.1:1337/').then((Response)=>{
-        this.ipData = Response.data;
+    axios.get('http://192.168.10.1:1337/Movies/1MoviePortal/').then((Response)=>{
+        this.string = Response.data;
         // console.log(Response.data);
+        this.rawData.titles = this.getData(Response.data,'.mp4">','.mp4</a>');
+        this.rawData.urls = this.getData(Response.data,'<a href="','">');
       })
+      
   },
   methods: {
-    getFromBetween:function (sub1,sub2) {
+    getFromBetween(sub1,sub2) {
         if(this.string.indexOf(sub1) < 0 || this.string.indexOf(sub2) < 0) return false;
         var SP = this.string.indexOf(sub1)+sub1.length;
         var string1 = this.string.substr(0,SP);
@@ -52,12 +69,12 @@ export default {
         var TP = string1.length + string2.indexOf(sub2);
         return this.string.substring(SP,TP);
     },
-    removeFromBetween:function (sub1,sub2) {
+    removeFromBetween(sub1,sub2) {
         if(this.string.indexOf(sub1) < 0 || this.string.indexOf(sub2) < 0) return false;
         var removal = sub1+this.getFromBetween(sub1,sub2)+sub2;
         this.string = this.string.replace(removal,"");
     },
-    getAllResults:function (sub1,sub2) {
+    getAllResults(sub1,sub2) {
         // first check to see if we do have both substrings
         if(this.string.indexOf(sub1) < 0 || this.string.indexOf(sub2) < 0) return;
 
@@ -74,7 +91,7 @@ export default {
         }
         else return;
     },
-    get:function (string,sub1,sub2) {
+    getData(string,sub1,sub2) {
         this.results = [];
         this.string = string;
         this.getAllResults(sub1,sub2);
