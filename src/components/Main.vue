@@ -32,7 +32,7 @@
               <v-divider></v-divider>
               <v-responsive>
               <!-- <embed :src= getURL(movie.src)> -->
-                <!-- <vuePlayer :path= getURL(movie.src)></vuePlayer> -->
+              <!-- <vuePlayer :path= getURL(movie.src)></vuePlayer> -->
               </v-responsive>
             </div>
           </v-expand-transition>
@@ -62,7 +62,7 @@
 
   // import vuePlayer from './VuePlayer';
   import movieJson from '../assets/moviesData.json';
-  
+
   // var path = require("../assets/posters/Maayavan_2017.jpg");
   const URLHEAD = "http://192.168.10.1:1337/";
     export default {
