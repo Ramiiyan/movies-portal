@@ -1,5 +1,5 @@
 [
-    { "title": "Pre-fab homes", "poster": "Maayavan_2017.jpg", "src":"Raja%20Rani%20(2013)-Bluray-Rip-1080P.mp4", "show": "false" },
-    { "title": "Favorite road trips", "poster": "Maayavan_2017.jpg", "src": "E:/Movies/Maayavan20172/Maayavan2.mp4","show": "false" },
-    { "title": "Best airlines", "poster": "Maayavan_2017.jpg", "src": "E:/Movies/Maayavan20173/Maayavan3.mp4", "show": "false"}
+    { "title": "Raja Rani", "poster": "Maayavan_2017.jpg", "src":"Movies/Raja%20Rani_2013_Bluray_1080p.mp4","show":"false"},
+    { "title": "Yaman", "poster": "Maayavan_2017.jpg", "src": "Movies/Yaman%20(2017).mp4" ,"show":"false"},
+    { "title": "Maayavan", "poster": "Maayavan_2017.jpg", "src": "Movies/Maayavan.mp4","show":"false"}
 ]
