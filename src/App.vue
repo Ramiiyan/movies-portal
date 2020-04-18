@@ -10,6 +10,10 @@
     <v-content>
       <Main :rawData="rawData"/>
       <v-spacer></v-spacer>
+      {{movieMap}}
+      <div v-for="(key,value) in movieMap" :key="key">
+        {{key}} : {{value}}
+      </div>
       <!-- <div v-for="(titles,url,index) in rawData" :key="index">
         <v-col>
           <v-row v-for="(title,index) in titles" :key=index>
@@ -45,10 +49,12 @@ export default {
     rawData:{
       titles:[],
       urls:[],
-    }
-
-    
-
+    },
+    movieMap:{},
+    movieMap2:{
+      "2012 (2009) 720p[Tamil + Telugu + Hindi + Eng]": "/Movies/1MoviePortal/2012%20(2009)%20720p%5BTamil%20%2B%20Telugu%20%2B%20Hindi%20%2B%20Eng%5D.mp4", 
+      "Anbe Sivam (2003)": "/Movies/1MoviePortal/Anbe%20Sivam%20(2003).mp4"
+    },
     //
   }),
   mounted() {
@@ -57,6 +63,8 @@ export default {
         // console.log(Response.data);
         this.rawData.titles = this.getData(Response.data,'.mp4">','.mp4</a>');
         this.rawData.urls = this.getData(Response.data,'<a href="','">');
+        this.movieMap = this.getMovieCollection();
+        // console.log(this.movieMap);
       })
       
   },
@@ -96,7 +104,17 @@ export default {
         this.string = string;
         this.getAllResults(sub1,sub2);
         return this.results;
+    },
+    getMovieCollection() {
+      this.rawData.urls.shift();
+      this.rawData.urls.pop();
+      this.rawData.titles.forEach((title, i)=>
+        this.movieMap[title] = this.rawData.urls[i]
+      );
+      return this.movieMap;
+      // console.log(this.movieMap);
     }
+
 
   }
 

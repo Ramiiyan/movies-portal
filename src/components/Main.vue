@@ -7,8 +7,15 @@
           cols="12"
           xs="12" sm="6" md="3" lg="3" xl="3"
         >
+        <!-- <v-col
+         v-for="(titles,urls,index) in rawData"
+        :key="index"
+        cols="12"
+        xs="12" sm="6" md="3" lg="3" xl="3"
+        > -->
         <v-card class="mx-auto" max-width="344">
 
+          <!-- <v-img :src="getPoster('Maayavan_2017.jpg')" height="200px"></v-img> -->
           <v-img :src="getPoster(movie.poster)" height="200px"></v-img>
           <v-card-title>
             {{movie.title}}
@@ -19,6 +26,7 @@
 
           <v-card-actions>
             <v-btn color="purple" text :href= getURL(movie.src)> 
+            <!-- <v-btn color="purple" text :href= getURL(movie.src)>  -->
               Play 
             </v-btn>
             <v-spacer></v-spacer>
@@ -31,29 +39,38 @@
             <div v-show="!movie.show" >
               <v-divider></v-divider>
               <v-responsive>
-              <!-- <embed :src= getURL(movie.src)> -->
-              <!-- <vuePlayer :path= getURL(movie.src)></vuePlayer> -->
+                hello
               </v-responsive>
             </div>
           </v-expand-transition>
         </v-card>
       </v-col>
     </v-row>
-
     <v-spacer></v-spacer>
-
-    <div v-for="(titles,url,index) in rawData" :key="index">
+    <!-- {{movieMap[0]}} -->
+    <div v-for="movie in movieMap" :key="movie.title">
       <ol>
-        <li v-for="(title,index) in titles" :key=index>
-          {{title}}
-        </li>
-      </ol>
-      <ul>  
-        <li v-for="(url,index) in urls" :key="index">
+        <!-- <li v-for="(title,index) in titles" :key=index> -->
+        <li>
+          {{movie.title}} : {{movie.url}}
+        </li>  
+        <!-- <li v-for="(url,index) in urls" :key=index>  
           {{url}}
-        </li>
-      </ul>
+        </li> -->
+      </ol>
     </div>
+     <div v-for="(titles,url,index) in rawData" :key="index">
+        <v-col>
+          <v-row v-for="(title,index) in titles" :key="index">
+            {{title}}
+          </v-row>
+        </v-col>
+        <v-col>  
+          <v-row v-for="(url,index) in urls" :key="index">
+            {{url}}
+          </v-row>
+        </v-col>
+      </div>
 
   </v-container>
 </template>
@@ -67,11 +84,14 @@
   const URLHEAD = "http://192.168.10.1:1337/";
     export default {
       props:{
+        // movieMap:{
+        //   type:Object,
+        //   required:true,
+        // },
         rawData:{
           type:Object,
-          required:true,
-        },
-        test:String
+        }
+        // test:String
       },
       components:{
         // vuePlayer,
@@ -80,11 +100,13 @@
         UrlHead : URLHEAD,
         myJson : movieJson,
         selectedMSrc : undefined,
+        
         // path : path,
           
       }),
       methods: {
         getPoster(path){
+          console.log(this.movieMap);
           return require('../assets/posters/'+ path);
         },
         getURL(path){
