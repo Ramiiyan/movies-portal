@@ -1,13 +1,43 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
+    <v-app-bar 
+      app 
+      color="blue" 
+      dark
+      elevate-on-scroll
+    >
+      <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
+      <v-toolbar-title> Movie Portal</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-switch
         v-model="$vuetify.theme.dark"
         inset
-        label="Theme Dark"
+        label="Dark Theme"
       ></v-switch>
     </v-app-bar>
+    <NavDrawer :Drawer="drawer"/>
+    <!-- <v-navigation-drawer v-model="drawer" 
+      absolute temporary>
+      <v-list nav dense>
+        <v-list-item-group 
+          v-model="group" 
+          active-class="deep-purple--text text--accent-4"
+        >
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon>mdi-home</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title> Home </v-list-item-title>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon>mdi-account</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title> Account </v-list-item-title>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-navigation-drawer> -->
 
     <v-content>
       <Main :movieMap="movieMap"/>
@@ -16,19 +46,7 @@
       <div v-for="(movie,index) in movieMap" :key="index">
         {{movie.title}} : {{movie.url}}
       </div>
-      <!-- <div v-for="(titles,url,index) in rawData" :key="index">
-        <v-col>
-          <v-row v-for="(title,index) in titles" :key=index>
-            {{title}}
-          </v-row>
-        </v-col>
-        <v-col>  
-          <v-row v-for="(url,index) in urls" :key="index">
-            {{url}}
-          </v-row>
-        </v-col>
-      </div> -->
-      <!-- <player/> -->
+
     </v-content>
 
   </v-app>
@@ -36,19 +54,15 @@
 
 <script>
 import Main from './components/Main';
-// import Player from './components/VuePlayer';
+import NavDrawer from './components/NavDrawer';
 import axios from 'axios';
 
 export default {
   name: 'App',
-  props:{
-    attrs: {
-      type: Object,
-      default: () => ({}),
-    }
-  },
+  
   components: {
     Main,
+    NavDrawer,
     // Player,
   },
   // beforeDestroy() {
@@ -56,6 +70,7 @@ export default {
   //   this.$vuetify.theme.dark = this.initialDark
   // },
   data:() => ({
+    drawer:false,
     rawData:{
       titles:[],
       urls:[],
