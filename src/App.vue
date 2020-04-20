@@ -2,17 +2,19 @@
   <v-app>
     <v-app-bar app color="primary" dark>
       <v-spacer></v-spacer>
-      <v-btn flat>
-        <!-- <router-link to="/play"> Play</router-link> -->
-      </v-btn>
+      <v-switch
+        v-model="$vuetify.theme.dark"
+        inset
+        label="Theme Dark"
+      ></v-switch>
     </v-app-bar>
 
     <v-content>
-      <Main :rawData="rawData"/>
+      <Main :movieMap="movieMap"/>
       <v-spacer></v-spacer>
-      {{movieMap}}
-      <div v-for="(key,value) in movieMap" :key="key">
-        {{key}} : {{value}}
+      
+      <div v-for="(movie,index) in movieMap" :key="index">
+        {{movie.title}} : {{movie.url}}
       </div>
       <!-- <div v-for="(titles,url,index) in rawData" :key="index">
         <v-col>
@@ -39,22 +41,26 @@ import axios from 'axios';
 
 export default {
   name: 'App',
-
+  props:{
+    attrs: {
+      type: Object,
+      default: () => ({}),
+    }
+  },
   components: {
     Main,
     // Player,
   },
-
+  // beforeDestroy() {
+  //   if(!this.$vuetify) return
+  //   this.$vuetify.theme.dark = this.initialDark
+  // },
   data:() => ({
     rawData:{
       titles:[],
       urls:[],
     },
-    movieMap:{},
-    movieMap2:{
-      "2012 (2009) 720p[Tamil + Telugu + Hindi + Eng]": "/Movies/1MoviePortal/2012%20(2009)%20720p%5BTamil%20%2B%20Telugu%20%2B%20Hindi%20%2B%20Eng%5D.mp4", 
-      "Anbe Sivam (2003)": "/Movies/1MoviePortal/Anbe%20Sivam%20(2003).mp4"
-    },
+    movieMap:[],
     //
   }),
   mounted() {
@@ -63,7 +69,7 @@ export default {
         // console.log(Response.data);
         this.rawData.titles = this.getData(Response.data,'.mp4">','.mp4</a>');
         this.rawData.urls = this.getData(Response.data,'<a href="','">');
-        this.movieMap = this.getMovieCollection();
+        this.getMovieCollection();
         // console.log(this.movieMap);
       })
       
@@ -108,10 +114,18 @@ export default {
     getMovieCollection() {
       this.rawData.urls.shift();
       this.rawData.urls.pop();
-      this.rawData.titles.forEach((title, i)=>
-        this.movieMap[title] = this.rawData.urls[i]
-      );
-      return this.movieMap;
+      // this.rawData.titles.forEach((title, i)=>
+      //   this.movieMap[title] = this.rawData.urls[i]
+      // );
+      var tit = this.rawData.titles;
+      var u = this.rawData.urls;
+      // var map =[];
+      for(var i=0; i<tit.length; i++){
+        this.movieMap = this.movieMap.concat({"title":tit[i],"url":u[i]});
+        // this.movieMap = map.concat(map);
+        // console.log(map);
+      }
+      // return this.movieMap;
       // console.log(this.movieMap);
     }
 
