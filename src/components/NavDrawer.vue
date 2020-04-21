@@ -1,9 +1,24 @@
 <template>
-    <v-navigation-drawer v-model="Drawer" 
+<div>
+  <v-app-bar 
+      app 
+      color="blue" 
+      dark
+      elevate-on-scroll
+    >
+      <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
+      <v-toolbar-title> Movie Portal</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-switch
+        v-model="$vuetify.theme.dark"
+        inset
+        label="Dark Theme"
+      ></v-switch>
+    </v-app-bar>
+    <v-navigation-drawer v-model="drawer" 
       absolute temporary>
       <v-list nav dense>
-        <v-list-item-group 
-          v-model="group" 
+        <v-list-item-group  
           active-class="deep-purple--text text--accent-4"
         >
           <v-list-item>
@@ -23,15 +38,13 @@
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
+</div>
 </template>
 <script>
 export default {
-    props:{
-        Drawer:{
-            type:Boolean,
-            required:true,
-        },
-    },
+    data:()=> ({
+      drawer:false,
+    }),
    
 }
 </script>

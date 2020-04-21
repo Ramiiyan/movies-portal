@@ -1,5 +1,14 @@
 <template>
     <v-container fluid>
+      <v-alert
+        text
+        prominent
+        type="error"
+        icon="mdi-cloud-alert"
+        :value=errorInfo.netConnected
+      >
+        {{errorInfo.errorMsg}}
+      </v-alert>
       <v-row dense>
         <v-col
           v-for="movie in movieMap"
@@ -9,13 +18,13 @@
         >
         <v-card class="mx-auto" max-width="344">
 
-          <v-img :src="getPoster('Maayavan_2017.jpg')" height="200px"></v-img>
-          <!-- <v-img :src="getPoster(movie.poster)" height="200px"></v-img> -->
+          <!-- <v-img :src="getPoster('Maayavan (2017).jpg')" height="200px"></v-img> -->
+          <v-img :src="getPoster(movie.poster)" height="400px"></v-img>
           <v-card-title>
             {{movie.title}}
           </v-card-title>
           <v-card-subtitle>
-            1,000 miles of wonder
+            
           </v-card-subtitle>
 
           <v-card-actions>
@@ -61,6 +70,10 @@
     export default {
       props:{
         movieMap:{
+          type:Array,
+          required:true,
+        },
+        errorInfo:{
           type:Object,
           required:true,
         },
