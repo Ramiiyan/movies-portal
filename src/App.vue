@@ -50,7 +50,7 @@ export default {
   }),
 
   mounted() {
-    axios.get('http://192.168.43.175:1337/Movies/1MoviePortal/').then((Response)=>{
+    axios.get('http://127.0.0.1:1337/Movies/1MoviePortal/').then((Response)=>{
         this.string = Response.data;
         console.log(Response.status);
         this.rawData.titles = this.getData(Response.data,'.mp4">','.mp4</a>');

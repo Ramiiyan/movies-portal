@@ -66,7 +66,7 @@
   import movieJson from '../assets/moviesData.json';
 
   // var path = require("../assets/posters/Maayavan_2017.jpg");
-  const URLHEAD = "http://192.168.10.1:1337";
+  const URLHEAD = "http://127.0.0.1:1337";
     export default {
       props:{
         movieMap:{
