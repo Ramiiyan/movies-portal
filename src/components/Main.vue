@@ -9,6 +9,7 @@
       >
         {{errorInfo.errorMsg}}
       </v-alert>
+      <!-- {{search}} -->
       <v-row dense>
         <v-col
           v-for="movie in filteredItems"

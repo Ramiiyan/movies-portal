@@ -1,11 +1,11 @@
 <template>
   <v-app>
     <NavDrawer v-on:searchFromNBar='onSearchChange'/>
-
     <v-content>
       <Main 
       :movieMap="movieMap"
       :errorInfo="errorInfo"
+      :search="fromNavBarGet"
       />
       <v-spacer></v-spacer>
       
@@ -115,13 +115,13 @@ export default {
       for(var i=0; i<title.length; i++){
         var imgSrc = this.rawData.titles[i] + ".jpg";
         this.movieMap = this.movieMap.concat({"title":title[i],"url":url[i],"poster":imgSrc});
-        console.log(imgSrc);
+        // console.log('imgSrc :' +imgSrc);
       }
       // console.log(this.movieMap);
     },
     onSearchChange(value) {
       this.fromNavBarGet = value;
-      console.log('AppParent : '+ this.fromNavBarGet);
+      // console.log('AppParent : '+ this.fromNavBarGet);
     },
 
 

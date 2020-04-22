@@ -1,20 +1,23 @@
 <template>
-<div>
+  <div>
+  <v-card class="overflow-hidden">
   <v-app-bar 
-      app 
-      color="purple darken-4" 
+      absolute
+      color="indigo darken-2"
       dark
-      elevate-on-scroll
+      Shrink-on-scroll
+      prominent
+      
     >
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
       <v-toolbar-title> Movie Portal</v-toolbar-title>
-
       <v-spacer></v-spacer>
       <v-text-field 
-        class="mx-3"
+        class="auto"
         flat
+        dense
         label="Search"
-        prepend-inner-icon="mdi-search"
+        prepend-inner-icon="mdi-magnify"
         solo-inverted
         v-model="search"
         clearable
@@ -23,11 +26,11 @@
       <v-switch
         v-model="$vuetify.theme.dark"
         color="purple lighten-3"
-        label="Dark Theme"
+        label="Dark Mode"
       ></v-switch>
     </v-app-bar>
-    <v-navigation-drawer v-model="drawer" 
-      absolute temporary>
+  </v-card>
+    <v-navigation-drawer v-model="drawer" temporary>
       <v-list nav dense>
         <v-list-item-group  
           active-class="deep-purple--text text--accent-4"
@@ -44,13 +47,14 @@
               <v-icon large color="purple darken-3">mdi-cog-outline</v-icon>
             </v-list-item-icon>
             <v-list-item-title> Settings </v-list-item-title>
-          </v-list-item>
-        
+          </v-list-item>  
         </v-list-item-group>
       </v-list>
+
     </v-navigation-drawer>
-</div>
+  </div>
 </template>
+
 <script>
 export default {
     data:()=> ({
@@ -60,7 +64,7 @@ export default {
     watch:{
       search:function() {
         this.$emit('searchFromNBar',this.search);
-        console.log('navDrawer: ' + this.search);
+        // console.log('navDrawer: ' + this.search);
       }
     },
     methods: {
