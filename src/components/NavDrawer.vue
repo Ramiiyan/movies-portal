@@ -8,7 +8,18 @@
     >
       <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
       <v-toolbar-title> Movie Portal</v-toolbar-title>
-      <!-- <v-spacer></v-spacer> -->
+
+      <v-spacer></v-spacer>
+      <v-text-field 
+        class="mx-3"
+        flat
+        label="Search"
+        prepend-inner-icon="mdi-search"
+        solo-inverted
+        v-model="search"
+        clearable
+        @click:clear="clearSearch"
+      ></v-text-field>
       <v-switch
         v-model="$vuetify.theme.dark"
         color="purple lighten-3"
@@ -44,7 +55,19 @@
 export default {
     data:()=> ({
       drawer:false,
+      search: '',
     }),
+    watch:{
+      search:function() {
+        this.$emit('searchFromNBar',this.search);
+        console.log('navDrawer: ' + this.search);
+      }
+    },
+    methods: {
+      clearSearch () {
+        this.search="";
+      },
+    },
    
 }
 </script>

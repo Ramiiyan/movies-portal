@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <NavDrawer />
+    <NavDrawer v-on:searchFromNBar='onSearchChange'/>
 
     <v-content>
       <Main 
@@ -36,7 +36,7 @@ export default {
   },
 
   data:() => ({
-    drawer:false,
+    fromNavBarGet:'',
     rawData:{
       titles:[],
       urls:[],
@@ -118,7 +118,11 @@ export default {
         console.log(imgSrc);
       }
       // console.log(this.movieMap);
-    }
+    },
+    onSearchChange(value) {
+      this.fromNavBarGet = value;
+      console.log('AppParent : '+ this.fromNavBarGet);
+    },
 
 
   }

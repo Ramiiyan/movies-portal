@@ -11,7 +11,7 @@
       </v-alert>
       <v-row dense>
         <v-col
-          v-for="movie in movieMap"
+          v-for="movie in filteredItems"
           :key="movie.title"
           cols="12"
           xs="12" sm="6" md="3" lg="3" xl="3"
@@ -64,7 +64,7 @@
 
   // import vuePlayer from './VuePlayer';
   import movieJson from '../assets/moviesData.json';
-
+  import _ from 'lodash';
   // var path = require("../assets/posters/Maayavan_2017.jpg");
   const URLHEAD = "http://127.0.0.1:1337";
     export default {
@@ -77,6 +77,7 @@
           type:Object,
           required:true,
         },
+        search:String,
         // rawData:{
         //   type:Object,
         // }
@@ -100,12 +101,19 @@
         },
         getURL(path){
           return URLHEAD + path; 
-        }
+        },
+        
       },
       computed:{
         renderText(){
           return this.selectedMSrc;
-        }
+        },
+        filteredItems() {
+          return _.orderBy(this.movieMap.filter(item =>{
+            if(!this.search) return this.movieMap;
+              return(item.title.toLowerCase().includes(this.search.toLowerCase()));
+          }),'title');
+        },
 
       },
     }
