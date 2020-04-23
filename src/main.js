@@ -9,6 +9,7 @@ import vuePlayer from 'vue-plyr';
 Vue.config.productionTip = false
 
 Vue.use(vuePlayer)
+Vue.use(router)
 // Vue.use(VueAxios,axios)
 
 new Vue({

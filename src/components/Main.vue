@@ -1,4 +1,5 @@
 <template>
+  <v-content>
     <v-container fluid>
       <v-alert
         text
@@ -24,29 +25,14 @@
           <v-card-title>
             {{movie.title}}
           </v-card-title>
-          <v-card-subtitle>
-            
-          </v-card-subtitle>
+          <!-- <v-card-subtitle>
+          </v-card-subtitle> -->
 
           <v-card-actions>
             <v-btn color="purple" text :href= getURL(movie.url)> 
-            <!-- <v-btn color="purple" text :href= getURL(movie.src)>  -->
               Play 
             </v-btn>
-            <!-- <v-spacer></v-spacer>
-            <v-btn icon @click="movie.show = !movie.show" >
-              <v-icon>{{ movie.show ? 'mdi-chevron-down' : 'mdi-chevron-up' }}</v-icon>
-            </v-btn> -->
           </v-card-actions>
-
-          <!-- <v-expand-transition >
-            <div v-show="!movie.show" >
-              <v-divider></v-divider>
-              <v-responsive>
-                hello
-              </v-responsive>
-            </div>
-          </v-expand-transition> -->
         </v-card>
       </v-col>
     </v-row>
@@ -59,12 +45,13 @@
       </ol>
     </div> -->
   </v-container>
+  </v-content>
 </template>
 
 <script>
 
-  // import vuePlayer from './VuePlayer';
   import movieJson from '../assets/moviesData.json';
+  // import Drawer from './Drawer';
   import _ from 'lodash';
   // var path = require("../assets/posters/Maayavan_2017.jpg");
   const URLHEAD = "http://127.0.0.1:1337";
@@ -85,7 +72,7 @@
         // test:String
       },
       components:{
-        // vuePlayer,
+        // Drawer,
       },
       data: () => ({
         UrlHead : URLHEAD,
