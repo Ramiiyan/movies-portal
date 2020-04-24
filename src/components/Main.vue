@@ -10,7 +10,7 @@
       >
         {{errorInfo.errorMsg}}
       </v-alert>
-      <!-- {{search}} -->
+
       <v-row dense>
         <v-col
           v-for="movie in filteredItems"
@@ -20,8 +20,8 @@
         >
         <v-card class="mx-auto" max-width="344">
 
-          <!-- <v-img :src="getPoster('Maayavan (2017).jpg')" height="200px"></v-img> -->
-          <v-img :src="getPoster(movie.poster)" height="400px"></v-img>
+          <v-img :src="getPoster(movie.poster)" height="400px"/>
+          <!-- <v-img src="/posters/2012%20(2009)%20Tamil%20720p.jpg" height="400px"/> -->
           <v-card-title>
             {{movie.title}}
           </v-card-title>
@@ -33,17 +33,11 @@
               Play 
             </v-btn>
           </v-card-actions>
+
         </v-card>
       </v-col>
     </v-row>
     <v-spacer></v-spacer>
-    <!-- <div v-for="(movie,index) in movieMap" :key="index">
-      <ol>
-        <li>
-          {{movie.title}} : {{movie.url}}
-        </li>  
-      </ol>
-    </div> -->
   </v-container>
   </v-content>
 </template>
@@ -84,8 +78,12 @@
       }),
       methods: {
         getPoster(path){
-          // console.log(this.movieMap);
-          return require('../assets/posters/'+ path);
+          try{
+            return require('../assets/posters/' + path);
+          }catch(e){
+            console.log("Image Err : " + e );
+            return require('../assets/posters/default.jpg');
+          }
         },
         getURL(path){
           return URLHEAD + path; 

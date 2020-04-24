@@ -6,7 +6,7 @@
         :mini-variant="miniVariant"
     >
       <v-list nav dense class="py-0">
-        <v-list-item one-line :class="miniVariant && 'px-0'">
+        <v-list-item :class="miniVariant && 'px-0'">
           <v-list-item-avatar>
             <img src="https://randomuser.me/api/portraits/men/81.jpg">
           </v-list-item-avatar>
@@ -19,6 +19,7 @@
           v-for="item in items"
           :key="item.title"
           link
+          @click.stop="Settings = item.dialog"
         >
           <v-list-item-icon>
             <v-icon>{{item.icon}}</v-icon>
@@ -28,6 +29,19 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
+      <v-dialog
+        v-model="Settings"
+        max-width="290"
+      >
+        <v-card>
+          <v-card-title class="headline">HELLO WORLD</v-card-title>
+          <v-card-text>this is my testing modal </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn text @click="Settings = false">Disagree</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </v-navigation-drawer>
 </template>
 
@@ -35,9 +49,10 @@
 export default {
     data:()=>({
         drawer:true,
+        Settings:false,
         items:[
-            {title:"Home", icon:"mdi-home-outline"},
-            {title:"Setting", icon:"mdi-cog-outline"},
+            {title:"Home", icon:"mdi-home-outline",dialog:false},
+            {title:"Settings", icon:"mdi-cog-outline",dialog:true},
         ],
       miniVariant:true,
       expandOnHover:true,  

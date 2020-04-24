@@ -7,12 +7,14 @@
       :errorInfo="errorInfo"
       :search="fromNavBarGet"
     />  
-      <div v-for="(movie,index) in movieMap" :key="index">
+      <div style="margin-left:60px;">
         <ol>
-          <li>{{movie.title}} : {{movie.url}}</li> 
-          <li>{{movie.poster}}</li>
+          <li v-for="(movie,index) in movieMap" :key="index">
+            {{movie.title}} : {{movie.url}} : {{movie.poster}}
+          </li> 
         </ol>
       </div>
+
   </v-app>
 </template>
 
@@ -23,6 +25,7 @@
   import Main from './components/Main';
   import AppBar from './components/AppBar';
   
+  const URLHEAD = "http://127.0.0.1:1337";
 
   export default {
     name: 'App',
@@ -46,7 +49,7 @@
       },
     }),
     mounted() {
-      axios.get('http://127.0.0.1:1337/Movies/1MoviePortal/').then((Response)=>{
+      axios.get(URLHEAD +'/Movies/1MoviePortal/').then((Response)=>{
         this.string = Response.data;
         console.log(Response.status);
         this.rawData.titles = this.getData(Response.data,'.mp4">','.mp4</a>');
